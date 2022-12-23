@@ -55,15 +55,15 @@ def to_RGB(array, axis):
     no_of_bands = array.shape[axis]
     output_array_shape = array.shape[:axis] + (3,) + array.shape[axis + 1:]
     output_array = np.zeros(output_array_shape)
-    slice_before = [slice(None)] * len(array.shape[:axis])
-    slice_after = [slice(None)] * len(array.shape[axis + 1:])
-    red_band = slice_before + [0] + slice_after
-    green_band = slice_before + [1] + slice_after
-    blue_band = slice_before + [2] + slice_after
+    slice_before = (slice(None),) * len(array.shape[:axis])
+    slice_after = (slice(None),) * len(array.shape[axis + 1:])
+    red_band = slice_before + (0,) + slice_after
+    green_band = slice_before + (1,) + slice_after
+    blue_band = slice_before + (2,) + slice_after
     wavelengths = __spectra_bands(no_of_bands)
     for band_no in range(no_of_bands):
         rgb = __wavelength_to_rgb(wavelengths[band_no])
-        data_at_spectra = array[(slice_before + [band_no] + slice_after)]
+        data_at_spectra = array[slice_before + (band_no,) + slice_after]
         output_array[red_band] = output_array[red_band] + rgb.red_intensity(data_at_spectra)
         output_array[green_band] = output_array[green_band] + rgb.green_intensity(data_at_spectra)
         output_array[blue_band] = output_array[blue_band] + rgb.blue_intensity(data_at_spectra)
