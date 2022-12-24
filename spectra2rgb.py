@@ -2,32 +2,32 @@ import numpy as np
 from RGB import RGB
 
 
-def __wavelength_to_rgb(wavelength, gamma=0.8):
+def __wavelength_to_rgb(wavelength):
     wavelength = float(wavelength)
     if 380 <= wavelength <= 440:
         attenuation = 0.3 + 0.7 * (wavelength - 380) / (440 - 380)
-        red = ((-(wavelength - 440) / (440 - 380)) * attenuation) ** gamma
+        red = ((-(wavelength - 440) / (440 - 380)) * attenuation)
         green = 0.0
-        blue = (1.0 * attenuation) ** gamma
+        blue = 1.0 * attenuation
     elif 440 <= wavelength <= 490:
         red = 0.0
-        green = ((wavelength - 440) / (490 - 440)) ** gamma
+        green = (wavelength - 440) / (490 - 440)
         blue = 1.0
     elif 490 <= wavelength <= 510:
         red = 0.0
         green = 1.0
-        blue = (-(wavelength - 510) / (510 - 490)) ** gamma
+        blue = -(wavelength - 510) / (510 - 490)
     elif 510 <= wavelength <= 580:
-        red = ((wavelength - 510) / (580 - 510)) ** gamma
+        red = (wavelength - 510) / (580 - 510)
         green = 1.0
         blue = 0.0
     elif 580 <= wavelength <= 645:
         red = 1.0
-        green = (-(wavelength - 645) / (645 - 580)) ** gamma
+        green = -(wavelength - 645) / (645 - 580)
         blue = 0.0
     elif 645 <= wavelength <= 750:
         attenuation = 0.3 + 0.7 * (750 - wavelength) / (750 - 645)
-        red = (1.0 * attenuation) ** gamma
+        red = 1.0 * attenuation
         green = 0.0
         blue = 0.0
     else:
