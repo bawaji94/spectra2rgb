@@ -39,7 +39,7 @@ def __wavelength_to_rgb(wavelength):
 def __spectra_bands(no_of_bands):
     min_visible_wavelength = 380
     max_visible_wavelength = 750
-    if no_of_bands <= 0:
+    if no_of_bands == 0:
         raise Exception("No of spectral bands should be > 0")
     elif no_of_bands == 1:
         visible_bands = [max_visible_wavelength]
