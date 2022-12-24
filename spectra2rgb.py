@@ -3,6 +3,9 @@ from RGB import RGB
 
 
 def __wavelength_to_rgb(wavelength):
+    red = 0
+    green = 0
+    blue = 0
     wavelength = float(wavelength)
     if 380 <= wavelength <= 440:
         attenuation = 0.3 + 0.7 * (wavelength - 380) / (440 - 380)
@@ -28,10 +31,6 @@ def __wavelength_to_rgb(wavelength):
     elif 645 <= wavelength <= 750:
         attenuation = 0.3 + 0.7 * (750 - wavelength) / (750 - 645)
         red = 1.0 * attenuation
-        green = 0.0
-        blue = 0.0
-    else:
-        red = 0.0
         green = 0.0
         blue = 0.0
     return RGB(red, green, blue)
