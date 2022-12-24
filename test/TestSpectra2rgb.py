@@ -58,6 +58,12 @@ class TesSpectra2RGB(unittest.TestCase):
         rgb = spectra2rgb.to_RGB(array, 2, inverse=True)
         np.testing.assert_array_equal(expected, rgb)
 
+    def test_to_RGB_should_not_convert_zero_band_data(self):
+        array = np.array([]).reshape(3, 3, 0)
+        with self.assertRaises(Exception) as context:
+            spectra2rgb.to_RGB(array, axis=2)
+        self.assertEqual("No of spectral bands should be > 0", str(context.exception))
+
 
 if __name__ == '__main__':
     unittest.main()
