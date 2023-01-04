@@ -5,6 +5,7 @@ class Color:
     def __init__(self, wavelength):
         self.__wavelength = wavelength
 
+    @property
     def rgb(self):
         red = 0
         green = 0
