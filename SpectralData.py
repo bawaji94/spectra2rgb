@@ -1,5 +1,6 @@
 from Colors import Colors
 import numpy as np
+from Slice import Slice
 
 
 class SpectralData:
@@ -10,17 +11,12 @@ class SpectralData:
         self.__colors = Colors(no_of_bands, inverse)
 
     def to_rgb(self):
-        output_array_shape = self.__array.shape[:self.__axis] + (3,) + self.__array.shape[self.__axis + 1:]
-        slice_before = (slice(None),) * len(self.__array.shape[:self.__axis])
-        slice_after = (slice(None),) * len(self.__array.shape[self.__axis + 1:])
-        output_array = np.zeros(output_array_shape)
-        red_band = slice_before + (0,) + slice_after
-        green_band = slice_before + (1,) + slice_after
-        blue_band = slice_before + (2,) + slice_after
+        s = Slice(self.__array.shape, self.__axis)
+        output_array = np.zeros(s.output_shape)
         for color, band_no in self.__colors.iterate():
-            data_at_spectra = self.__array[slice_before + (band_no,) + slice_after]
-            output_array[red_band] = output_array[red_band] + color.rgb.red_intensity(data_at_spectra)
-            output_array[green_band] = output_array[green_band] + color.rgb.green_intensity(data_at_spectra)
-            output_array[blue_band] = output_array[blue_band] + color.rgb.blue_intensity(data_at_spectra)
+            data_at_spectra = self.__array[s.at(band_no)]
+            output_array[s.at(0)] = output_array[s.at(0)] + color.rgb.red_intensity(data_at_spectra)
+            output_array[s.at(1)] = output_array[s.at(1)] + color.rgb.green_intensity(data_at_spectra)
+            output_array[s.at(2)] = output_array[s.at(2)] + color.rgb.blue_intensity(data_at_spectra)
         scaled_to_rgb = (output_array / output_array.max()) * 255
         return (scaled_to_rgb + 0.5).astype(int)
