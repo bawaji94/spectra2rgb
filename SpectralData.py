@@ -6,8 +6,7 @@ from Slice import Slice
 class SpectralData:
     def __init__(self, array, axis, inverse=False):
         self.__array = array
-        no_of_bands = array.shape[axis]
-        self.__colors = Colors(no_of_bands, inverse)
+        self.__colors = Colors(array.shape[axis], inverse)
         self.__slice = Slice(array.shape, axis)
 
     def to_rgb(self):
