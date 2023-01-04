@@ -9,6 +9,7 @@ class SpectralData:
         no_of_bands = self.__array.shape[self.__axis]
         self.__colors = Colors(no_of_bands, inverse)
 
+    @property
     def to_rgb(self):
         output_array_shape = self.__array.shape[:self.__axis] + (3,) + self.__array.shape[self.__axis + 1:]
         slice_before = (slice(None),) * len(self.__array.shape[:self.__axis])
