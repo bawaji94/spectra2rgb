@@ -40,7 +40,7 @@ class TesSpectra2RGB(unittest.TestCase):
             spectra2rgb.to_RGB(array, axis=2)
         self.assertEqual("No of spectral bands should be > 0", str(context.exception))
 
-    def test_to_RGB_should_convert_multi_spectra_to_rgb(self):
+    def test_to_RGB_should_convert_multi_spectra_to_rgb_in_axis_1(self):
         array = np.arange(9 * 7).reshape(3, 7, 3)
 
         expected = [[[52, 57, 61], [28, 31, 34], [7, 10, 12]],
