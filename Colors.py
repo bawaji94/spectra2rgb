@@ -28,4 +28,3 @@ class Colors(list):
         bands_range = range(self.__no_of_bands)
         bands = reversed(bands_range) if self.__inverse else bands_range
         return zip(self, bands)
-
