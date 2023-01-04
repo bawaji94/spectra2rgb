@@ -1,52 +1,19 @@
 import numpy as np
-from RGB import RGB
-
-
-def __wavelength_to_rgb(wavelength):
-    red = 0
-    green = 0
-    blue = 0
-    wavelength = float(wavelength)
-    if 380 <= wavelength <= 440:
-        attenuation = 0.3 + 0.7 * (wavelength - 380) / (440 - 380)
-        red = ((-(wavelength - 440) / (440 - 380)) * attenuation)
-        green = 0.0
-        blue = 1.0 * attenuation
-    elif 440 <= wavelength <= 490:
-        red = 0.0
-        green = (wavelength - 440) / (490 - 440)
-        blue = 1.0
-    elif 490 <= wavelength <= 510:
-        red = 0.0
-        green = 1.0
-        blue = -(wavelength - 510) / (510 - 490)
-    elif 510 <= wavelength <= 580:
-        red = (wavelength - 510) / (580 - 510)
-        green = 1.0
-        blue = 0.0
-    elif 580 <= wavelength <= 645:
-        red = 1.0
-        green = -(wavelength - 645) / (645 - 580)
-        blue = 0.0
-    elif 645 <= wavelength <= 750:
-        attenuation = 0.3 + 0.7 * (750 - wavelength) / (750 - 645)
-        red = 1.0 * attenuation
-        green = 0.0
-        blue = 0.0
-    return RGB(red, green, blue)
+from Color import Color
 
 
 def __spectra_bands(no_of_bands):
     min_visible_wavelength = 380
     max_visible_wavelength = 750
+    red = Color(max_visible_wavelength)
     if no_of_bands == 0:
         raise Exception("No of spectral bands should be > 0")
     elif no_of_bands == 1:
-        visible_bands = [max_visible_wavelength]
+        visible_bands = [red]
     else:
         delta_lambda = (max_visible_wavelength - min_visible_wavelength) / (no_of_bands - 1)
-        bands = list(map(lambda x: min_visible_wavelength + (x * delta_lambda), range(no_of_bands - 1)))
-        visible_bands = bands + [max_visible_wavelength]
+        bands = list(map(lambda x: Color(min_visible_wavelength + (x * delta_lambda)), range(no_of_bands - 1)))
+        visible_bands = bands + [red]
     return visible_bands
 
 
@@ -62,7 +29,7 @@ def to_rgb(array, axis, inverse=False):
     wavelengths = __spectra_bands(no_of_bands)
     for band_no in range(no_of_bands):
         wavelength = no_of_bands - band_no - 1 if inverse else band_no
-        rgb = __wavelength_to_rgb(wavelengths[wavelength])
+        rgb = wavelengths[wavelength].rgb()
         data_at_spectra = array[slice_before + (band_no,) + slice_after]
         output_array[red_band] = output_array[red_band] + rgb.red_intensity(data_at_spectra)
         output_array[green_band] = output_array[green_band] + rgb.green_intensity(data_at_spectra)
