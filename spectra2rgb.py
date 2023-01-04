@@ -50,7 +50,7 @@ def __spectra_bands(no_of_bands):
     return visible_bands
 
 
-def to_RGB(array, axis, inverse=False):
+def to_rgb(array, axis, inverse=False):
     no_of_bands = array.shape[axis]
     output_array_shape = array.shape[:axis] + (3,) + array.shape[axis + 1:]
     output_array = np.zeros(output_array_shape)

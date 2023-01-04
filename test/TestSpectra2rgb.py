@@ -11,7 +11,7 @@ class TesSpectra2RGB(unittest.TestCase):
                     [[97, 108, 119], [130, 141, 152], [162, 173, 184]],
                     [[0, 3, 6], [10, 13, 16], [19, 23, 26]]]
 
-        rgb = spectra2rgb.to_RGB(array, 0)
+        rgb = spectra2rgb.to_rgb(array, 0)
         np.testing.assert_array_equal(expected, rgb)
 
     def test_to_RGB_should_convert_multi_spectra_inversed_to_rgb(self):
@@ -21,7 +21,7 @@ class TesSpectra2RGB(unittest.TestCase):
                     [[97, 108, 119], [130, 141, 152], [162, 173, 184]],
                     [[58, 62, 65], [68, 71, 75], [78, 81, 84]]]
 
-        rgb = spectra2rgb.to_RGB(array, 0, inverse=True)
+        rgb = spectra2rgb.to_rgb(array, 0, inverse=True)
         np.testing.assert_array_equal(expected, rgb)
 
     def test_to_RGB_should_convert_single_spectra_to_red(self):
@@ -31,13 +31,13 @@ class TesSpectra2RGB(unittest.TestCase):
                     [[96, 0, 0], [128, 0, 0], [159, 0, 0]],
                     [[191, 0, 0], [223, 0, 0], [255, 0, 0]]]
 
-        rgb = spectra2rgb.to_RGB(array, 2, inverse=True)
+        rgb = spectra2rgb.to_rgb(array, 2, inverse=True)
         np.testing.assert_array_equal(expected, rgb)
 
     def test_to_RGB_should_not_convert_zero_band_data(self):
         array = np.array([]).reshape(3, 3, 0)
         with self.assertRaises(Exception) as context:
-            spectra2rgb.to_RGB(array, axis=2)
+            spectra2rgb.to_rgb(array, axis=2)
         self.assertEqual("No of spectral bands should be > 0", str(context.exception))
 
     def test_to_RGB_should_convert_multi_spectra_to_rgb_in_axis_1(self):
@@ -47,7 +47,7 @@ class TesSpectra2RGB(unittest.TestCase):
                     [[149, 154, 158], [100, 103, 107], [58, 61, 63]],
                     [[246, 250, 255], [172, 176, 179], [109, 112, 114]]]
 
-        rgb = spectra2rgb.to_RGB(array, 1)
+        rgb = spectra2rgb.to_rgb(array, 1)
         np.testing.assert_array_equal(expected, rgb)
 
 
