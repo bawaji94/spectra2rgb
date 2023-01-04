@@ -11,10 +11,10 @@ def to_rgb(array, axis, inverse=False):
     red_band = slice_before + (0,) + slice_after
     green_band = slice_before + (1,) + slice_after
     blue_band = slice_before + (2,) + slice_after
-    wavelengths = Colors(no_of_bands)
-    for band_no in range(no_of_bands):
-        wavelength = no_of_bands - band_no - 1 if inverse else band_no
-        rgb = wavelengths[wavelength].rgb()
+    colors = Colors(no_of_bands)
+    bands = reversed(range(no_of_bands)) if inverse else range(no_of_bands)
+    for color, band_no in zip(colors, bands):
+        rgb = color.rgb()
         data_at_spectra = array[slice_before + (band_no,) + slice_after]
         output_array[red_band] = output_array[red_band] + rgb.red_intensity(data_at_spectra)
         output_array[green_band] = output_array[green_band] + rgb.green_intensity(data_at_spectra)
