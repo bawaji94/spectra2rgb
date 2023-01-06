@@ -22,6 +22,12 @@ class TestColor(unittest.TestCase):
 
         self.assertEqual(RGB(0, 0, 1), color.rgb)
 
+    def test_should_convert_orange_wavelength_to_orange(self):
+        blue_wavelength = 580
+        color = Color(blue_wavelength)
+
+        self.assertEqual(RGB(1, 1, 0), color.rgb)
+
     def test_red_and_violet_are_not_same_color(self):
         self.assertNotEqual(Color(Color.RED), Color(Color.VIOLET))
 
