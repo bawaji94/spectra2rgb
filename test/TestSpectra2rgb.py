@@ -1,5 +1,5 @@
 import unittest
-from spectra2rgb.SpectralData import SpectralData
+from spectra2rgb import SpectralData
 import numpy as np
 
 

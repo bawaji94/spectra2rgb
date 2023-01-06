@@ -1,5 +1,5 @@
-from spectra2rgb.Colors import Colors
-from spectra2rgb.Slice import Slice
+from spectra2rgb import Colors
+from spectra2rgb import Slice
 
 
 class SpectralData:
