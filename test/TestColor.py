@@ -22,6 +22,15 @@ class TestColor(unittest.TestCase):
 
         self.assertEqual(RGB(0, 0, 1), color.rgb)
 
+    def test_red_and_violet_are_not_same_color(self):
+        self.assertNotEqual(Color(Color.RED), Color(Color.VIOLET))
+
+    def test_red_color_is_not_equal_to_1(self):
+        self.assertNotEqual(Color(Color.RED), 1)
+
+    def test_render_Color_with_wavelength(self):
+        self.assertEqual(str(Color(Color.RED)), 'Color(λ = 750nm)')
+
 
 if __name__ == '__main__':
     unittest.main()
