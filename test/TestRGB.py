@@ -40,6 +40,12 @@ class TesSpectra2RGB(unittest.TestCase):
         actual = RGB(0, 0, 1).intensities(array[:, :, 1], _slice)
         np.testing.assert_array_equal(expected, actual)
 
+    def test_RGB_is_not_equal_to_1(self):
+        self.assertNotEqual(RGB(0, 0, 0), 1)
+
+    def test_RGB_serialization(self):
+        self.assertEqual('RGB(R=0.5, G=1.0, B=2.5)', str(RGB(0.5, 1.0, 2.5)))
+
 
 if __name__ == '__main__':
     unittest.main()

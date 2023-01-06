@@ -15,7 +15,7 @@ class RGB:
         return False
 
     def __str__(self):
-        return f'R={self.__red}, G={self.__green}, B={self.__blue}'
+        return f'RGB(R={self.__red}, G={self.__green}, B={self.__blue})'
 
     def intensities(self, data, _slice):
         rgb_intensities = np.zeros(_slice.rgb_shape)
