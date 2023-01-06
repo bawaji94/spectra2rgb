@@ -1,5 +1,6 @@
 import unittest
-from spectra2rgb import Colors, Color
+import numpy as np
+from spectra2rgb import Colors, Color, Slice
 
 
 class TestColors(unittest.TestCase):
@@ -25,3 +26,27 @@ class TestColors(unittest.TestCase):
         with self.assertRaises(Exception) as context:
             Colors(0, False)
         self.assertEqual("No of spectral bands should be > 0", str(context.exception))
+
+    def test_convert_multi_spectra_to_rgb_array_when_not_inversed(self):
+        array = np.arange(27).reshape(3, 3, 3)
+        expected = [[[135, 150, 165], [180, 195, 210], [225, 240, 255]],
+                    [[97, 108, 119], [130, 141, 152], [162, 173, 184]],
+                    [[0, 3, 6], [10, 13, 16], [19, 23, 26]]]
+
+        colors = Colors(3, False)
+        rgb_intensities = colors.rgb_intensities(array, Slice(array.shape, axis=0))
+
+        np.testing.assert_array_equal(expected, rgb_intensities)
+        self.assertEqual(np.int64, rgb_intensities.dtype)
+
+    def test_convert_multi_spectra_to_rgb_array_when_inversed(self):
+        array = np.arange(27).reshape(3, 3, 3)
+        expected = [[[135, 150, 165], [180, 195, 210], [225, 240, 255]],
+                    [[97, 108, 119], [130, 141, 152], [162, 173, 184]],
+                    [[58, 62, 65], [68, 71, 75], [78, 81, 84]]]
+
+        colors = Colors(3, True)
+        rgb_intensities = colors.rgb_intensities(array, Slice(array.shape, axis=0))
+
+        np.testing.assert_array_equal(expected, rgb_intensities)
+        self.assertEqual(np.int64, rgb_intensities.dtype)
