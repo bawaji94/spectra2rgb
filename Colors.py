@@ -1,4 +1,5 @@
 from Color import Color
+import numpy as np
 
 
 class Colors(list):
@@ -24,7 +25,15 @@ class Colors(list):
             colors = colors + [red]
         return colors
 
-    def iterate(self):
+    def __iterate(self):
         bands_range = range(self.__no_of_bands)
         bands = reversed(bands_range) if self.__inverse else bands_range
         return zip(self, bands)
+
+    def rgb_intensities(self, data, _slice):
+        output_array = np.zeros(_slice.output_shape)
+        for color, band_no in self.__iterate():
+            data_at_spectra = data[_slice.at(band_no)]
+            output_array = output_array + color.rgb.intensities(data_at_spectra, _slice)
+        scaled_to_rgb = (output_array / output_array.max()) * 255
+        return (scaled_to_rgb + 0.5).astype(int)
