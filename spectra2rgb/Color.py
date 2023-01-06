@@ -1,4 +1,4 @@
-from RGB import RGB
+from spectra2rgb.RGB import RGB
 
 
 class Color:

@@ -1,4 +1,4 @@
-from Color import Color
+from spectra2rgb.Color import Color
 import numpy as np
 
 
