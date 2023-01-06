@@ -4,7 +4,7 @@ class Slice:
         self.__after = shape[axis + 1:]
 
     @property
-    def output_shape(self):
+    def rgb_shape(self):
         return self.__before + (3,) + self.__after
 
     def at(self, index):

@@ -31,7 +31,7 @@ class Colors(list):
         return zip(self, bands)
 
     def rgb_intensities(self, data, _slice):
-        output_array = np.zeros(_slice.output_shape)
+        output_array = np.zeros(_slice.rgb_shape)
         for color, band_no in self.__iterate():
             data_at_spectra = data[_slice.at(band_no)]
             output_array = output_array + color.rgb.intensities(data_at_spectra, _slice)
