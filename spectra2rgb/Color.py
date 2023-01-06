@@ -40,3 +40,11 @@ class Color:
             green = 0.0
             blue = 0.0
         return RGB(red, green, blue)
+
+    def __eq__(self, other):
+        if isinstance(other, Color):
+            return self.__wavelength == other.__wavelength
+        return False
+
+    def __str__(self):
+        return f'Color(λ = {self.__wavelength})'
