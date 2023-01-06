@@ -9,8 +9,13 @@ class RGB:
 
     def __eq__(self, other):
         if isinstance(other, RGB):
-            return self.__red == other.__red
+            return self.__red == other.__red \
+                and self.__green == other.__green \
+                and self.__blue == self.__blue
         return False
+
+    def __str__(self):
+        return f'R={self.__red}, G={self.__green}, B={self.__blue}'
 
     def intensities(self, data, _slice):
         rgb_intensities = np.zeros(_slice.rgb_shape)
