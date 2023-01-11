@@ -46,6 +46,15 @@ class TesSpectra2RGB(unittest.TestCase):
     def test_RGB_serialization(self):
         self.assertEqual('RGB(R=0.5, G=1.0, B=2.5)', str(RGB(0.5, 1.0, 2.5)))
 
+    def test_RGB_generates_red_hexcode(self):
+        self.assertEqual('#FF0000', RGB(1.0, 0, 0).to_hexcode())
+
+    def test_RGB_generates_green_hexcode(self):
+        self.assertEqual('#00FF00', RGB(0, 1.0, 0).to_hexcode())
+
+    def test_RGB_generates_blue_hexcode(self):
+        self.assertEqual('#0000FF', RGB(0, 0, 1.0).to_hexcode())
+
 
 if __name__ == '__main__':
     unittest.main()

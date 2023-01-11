@@ -37,6 +37,12 @@ class TestColor(unittest.TestCase):
     def test_render_Color_with_wavelength(self):
         self.assertEqual(str(Color(Color.RED)), 'Color(λ = 750nm)')
 
+    def test_should_convert_red_wavelength_to_red_hexcode(self):
+        red_wavelength = 645
+        color = Color(red_wavelength)
+
+        self.assertEqual('#FF0000', color.hexcode)
+
 
 if __name__ == '__main__':
     unittest.main()

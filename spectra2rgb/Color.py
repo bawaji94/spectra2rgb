@@ -41,6 +41,10 @@ class Color:
             blue = 0.0
         return RGB(red, green, blue)
 
+    @property
+    def hexcode(self):
+        return self.rgb.to_hexcode()
+
     def __eq__(self, other):
         if isinstance(other, Color):
             return self.__wavelength == other.__wavelength
