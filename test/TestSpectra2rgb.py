@@ -34,6 +34,17 @@ class TesSpectra2RGB(unittest.TestCase):
         mock_colors.rgb_intensities.assert_called_with(x, mock_slice)
         self.assertEqual(actual, 'dummy_return_value')
 
+    @mock.patch("spectra2rgb.spectralData.Slice")
+    @mock.patch("spectra2rgb.spectralData.Colors")
+    def test_get_colors(self, mock_colors, mock_slice):
+        mock_colors.return_value = ['some', 'colors']
+        mock_slice.return_value = mock_slice
+        x = np.random.random((3, 3, 3))
+
+        actual = SpectralData(x, axis=0).colors
+
+        self.assertEqual(actual, ['some', 'colors'])
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -10,3 +10,7 @@ class SpectralData:
 
     def to_rgb(self):
         return self.__colors.rgb_intensities(self.__array, self.__slice)
+
+    @property
+    def colors(self):
+        return self.__colors

@@ -21,16 +21,11 @@ class Colors(list):
                 range(self.__no_of_bands - 1)
             ))
             colors = colors + [red]
-        return colors
-
-    def __iterate(self):
-        bands_range = range(self.__no_of_bands)
-        bands = reversed(bands_range) if self.__inverse else bands_range
-        return zip(self, bands)
+        return reversed(colors) if self.__inverse else colors
 
     def rgb_intensities(self, data, _slice):
         output_array = np.zeros(_slice.rgb_shape)
-        for color, band_no in self.__iterate():
+        for band_no, color in enumerate(self):
             data_at_spectra = data[_slice.at(band_no)]
             output_array = output_array + color.rgb.intensities(data_at_spectra, _slice)
         scaled_to_rgb = (output_array / output_array.max()) * 255
