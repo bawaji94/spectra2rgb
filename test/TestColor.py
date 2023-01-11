@@ -34,8 +34,8 @@ class TestColor(unittest.TestCase):
     def test_red_color_is_not_equal_to_1(self):
         self.assertNotEqual(Color(Color.RED), 1)
 
-    def test_render_Color_with_wavelength(self):
-        self.assertEqual(str(Color(Color.RED)), 'Color(λ = 750nm)')
+    def test_serialize_Color_with_wavelength(self):
+        self.assertEqual(str(Color(Color.RED)), 'Color(λ=750nm)')
 
     def test_should_convert_red_wavelength_to_red_hexcode(self):
         red_wavelength = 645

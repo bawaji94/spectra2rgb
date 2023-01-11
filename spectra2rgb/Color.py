@@ -51,4 +51,4 @@ class Color:
         return False
 
     def __str__(self):
-        return f'Color(λ = {self.__wavelength}nm)'
+        return f'Color(λ={self.__wavelength}nm)'

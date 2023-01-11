@@ -30,3 +30,6 @@ class Colors(list):
             output_array = output_array + color.rgb.intensities(data_at_spectra, _slice)
         scaled_to_rgb = (output_array / output_array.max()) * 255
         return (scaled_to_rgb + 0.5).astype(int)
+
+    def __str__(self):
+        return '[' + ', '.join(list(map(lambda x: str(x), list(self)))) + ']'

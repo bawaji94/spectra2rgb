@@ -50,3 +50,10 @@ class TestColors(unittest.TestCase):
 
         np.testing.assert_array_equal(expected, rgb_intensities)
         self.assertEqual(np.int64, rgb_intensities.dtype)
+
+    def test_colors_be_serializable(self):
+        colors = Colors(3, True)
+
+        expected = '[Color(λ=750nm), Color(λ=565.0nm), Color(λ=380.0nm)]'
+
+        self.assertEqual(expected, str(colors))
